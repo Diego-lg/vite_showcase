@@ -1,0 +1,18 @@
+.showcase {
+    border-width: 1px;
+}
+
+/* Default border color */
+@media (max-width: 600px) {
+    .showcase {
+        border-color: #007bff;
+    }
+}
+
+/* Larger screens */
+@media (min-width: 601px) {
+    .showcase {
+        border-color: #ff5733;
+        /* Example for a different border color on larger screens */
+    }
+}
