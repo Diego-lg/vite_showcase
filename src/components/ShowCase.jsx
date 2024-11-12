@@ -3,14 +3,20 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import TshirtShowcase from "./TshirtShowcase";
+import { Toggle } from "@/components/ui/toggle";
+import { Zap } from "lucide-react";
 
-const ShowCase = () => {
+export default function ShowCase() {
   const [sliderValue, setSliderValue] = useState({ x: 0, y: 0 });
   const [textInput, setTextInput] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isToggled, setIsToggled] = useState(1);
 
+  const handleToggle = (pressed) => {
+    setIsToggled(pressed ? 1 : 0);
+  };
   const handleXChange = (newXValue) => {
     setSliderValue((prev) => ({ ...prev, x: newXValue }));
   };
@@ -64,6 +70,7 @@ const ShowCase = () => {
         imageUrl={imageUrl}
         loading={loading}
         sliderValue={sliderValue}
+        toggled={isToggled}
       />
       <ControlPanel>
         <SliderSection>
@@ -99,6 +106,14 @@ const ShowCase = () => {
             />
             <span>Y: {sliderValue.y}</span>
           </SliderContainer>
+          <Toggle
+            aria-label="Toggle random feature"
+            className="ml-2"
+            pressed={isToggled === 1}
+            onPressedChange={handleToggle}
+          >
+            <Zap className="h-4 w-4" />
+          </Toggle>
         </SliderSection>
         <ButtonSection>
           <StyledButton onClick={openPopup}>Generate</StyledButton>
@@ -130,7 +145,7 @@ const ShowCase = () => {
       {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
     </ShowcaseContainer>
   );
-};
+}
 
 const ShowcaseContainer = styled.div`
   display: flex;
@@ -169,6 +184,7 @@ const SliderSection = styled.div`
   display: flex;
   gap: 1rem;
   flex: 1;
+  align-items: center;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -322,5 +338,3 @@ const Popup = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
-
-export default ShowCase;

@@ -34,14 +34,15 @@ import DynamicFerrofluid from "./LoadingFerrofluid";
 import { LineSegments } from "three";
 import { Edges } from "@react-three/drei";
 
-const Scene = ({ fullTextureUrl, loading, sliderValue }) => {
+const Scene = ({ fullTextureUrl, loading, sliderValue, toggled }) => {
   const texture = useLoader(TextureLoader, fullTextureUrl);
 
   // Apply texture settings (wrapping and repetition)
   useEffect(() => {
     texture.wrapS = texture.wrapT = RepeatWrapping;
-    texture.repeat.set(1, -1);
-  }, [texture]);
+    texture.repeat.set(toggled ? 1 : 2, -1); // Adjust this based on your needs
+    console.log(toggled);
+  }, [texture, toggled]); // Add toggled to the dependency array
 
   // Offset adjustment for texture based on sliderValue
   useEffect(() => {
@@ -127,10 +128,10 @@ const Scene = ({ fullTextureUrl, loading, sliderValue }) => {
   );
 };
 
-const TshirtShowcase = ({ imageUrl, loading, sliderValue }) => {
+const TshirtShowcase = ({ imageUrl, loading, sliderValue, toggled }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const imageurl_shopify =
-    imageUrl || queryParams.get("image") || "xamples/010.png";
+    imageUrl || queryParams.get("image") || "xamples/va.jpeg";
 
   return (
     <Canvas
@@ -152,6 +153,7 @@ const TshirtShowcase = ({ imageUrl, loading, sliderValue }) => {
           fullTextureUrl={imageurl_shopify}
           loading={loading}
           sliderValue={sliderValue}
+          toggled={toggled} // Add this line
         />
       </Suspense>
       <OrbitControls
