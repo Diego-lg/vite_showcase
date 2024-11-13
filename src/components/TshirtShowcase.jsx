@@ -131,7 +131,7 @@ const Scene = ({ fullTextureUrl, loading, sliderValue, toggled }) => {
 const TshirtShowcase = ({ imageUrl, loading, sliderValue, toggled }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const imageurl_shopify =
-    imageUrl || queryParams.get("image") || "xamples/va.jpeg";
+    imageUrl || queryParams.get("image") || "xamples/p2.jpg";
 
   return (
     <Canvas
