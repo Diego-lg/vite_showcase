@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import HeroSection from "./components/HeroSection";
 
 import "./App.css";
 import ShowCase from "./components/ShowCase";
@@ -14,6 +15,7 @@ function App() {
 
           <Route path="/showcase" element={<ShowCase />} />
           <Route path="/cuadro" element={<Cuadro />} />
+          <Route path="/hero-section" element={<HeroSection />} />
         </Routes>
       </div>
     </Router>
